@@ -11,12 +11,15 @@
   "bin": {
     "domtools": "./index.js"
   },
-  "devDependencies": {},
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "scratch": "scratchpad "
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/workeffortwaste/repl-domtool"
   },
-  "keywords": [],
-  "author": "",
+  "devDependencies": {},
+  "keywords": ["devtools", "repl"],
+  "author": {
+    "name": "Chris Johnson",
+    "url": "https://defaced.dev"
+  },
   "license": "ISC"
 }
