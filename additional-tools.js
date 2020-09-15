@@ -1,4 +1,3 @@
-
 module.exports = function (dom) {
   const jsdom = dom
 
