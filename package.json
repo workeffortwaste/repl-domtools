@@ -1,6 +1,6 @@
 {
   "name": "repl-domtools",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Browser free DevTools for your command line.",
   "main": "index.js",
   "dependencies": {
@@ -9,17 +9,24 @@
     "yargs": "^16.0.3"
   },
   "bin": {
-    "domtools": "./index.js"
+    "domtools": "index.js"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/workeffortwaste/repl-domtool"
+    "url": "git+https://github.com/workeffortwaste/repl-domtools.git"
   },
   "devDependencies": {},
-  "keywords": ["devtools", "repl"],
-  "author": {
-    "name": "Chris Johnson",
-    "url": "https://defaced.dev"
+  "keywords": [
+    "devtools",
+    "repl"
+  ],
+  "author": "Chris Johnson (https://defaced.dev)",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/workeffortwaste/repl-domtools/issues"
   },
-  "license": "ISC"
+  "homepage": "https://github.com/workeffortwaste/repl-domtools#readme",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  }
 }
