@@ -7,6 +7,7 @@ virtualConsole.sendTo(console, { omitJSDOMErrors: true }) // Send the virtual co
 const { JSDOM } = jsdom
 const yargs = require('yargs')
 const readline = require('readline') // Used for easier output control.
+const ncp = require('copy-paste')
 
 const resourceLoader = new jsdom.ResourceLoader({
   strictSSL: false, // Disable requirement for valid SSL certificate.
@@ -64,6 +65,7 @@ getDOM(options.url)
     _context.window = e.window
     _context.document = e.window.document
     _context.$ = require('jquery')(e.window)
+    _context.copy = (e) => ncp.copy(e)
     _context.table = (e) => { let a = new Table(); a = a.concat(e); _context.console.log(a.toString()) }
     _context.dom = require('./additional-tools')(e)
   })
