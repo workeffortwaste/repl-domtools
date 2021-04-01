@@ -62,6 +62,7 @@ getDOM(options.url)
     console.log('DOM initialised')
     const _context = require('repl').start({ prompt: '> ' }).context
     // Hand the DOM to the REPL context.
+    _context.location = new URL(options.url)
     _context.window = e.window
     _context.document = e.window.document
     _context.jQuery = require('jquery')(e.window)
