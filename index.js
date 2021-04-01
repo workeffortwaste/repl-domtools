@@ -64,7 +64,7 @@ getDOM(options.url)
     // Hand the DOM to the REPL context.
     _context.window = e.window
     _context.document = e.window.document
-    _context.$ = require('jquery')(e.window)
+    _context.jQuery = require('jquery')(e.window)
     _context.copy = (e) => ncp.copy(e)
     _context.table = (e) => { let a = new Table(); a = a.concat(e); _context.console.log(a.toString()) }
     _context.dom = require('./additional-tools')(e)
