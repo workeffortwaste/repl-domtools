@@ -8,6 +8,7 @@ const { JSDOM } = jsdom
 const yargs = require('yargs')
 const readline = require('readline') // Used for easier output control.
 const ncp = require('copy-paste')
+const ncp = require('copy-paste-win32fix')
 
 const resourceLoader = new jsdom.ResourceLoader({
   strictSSL: false, // Disable requirement for valid SSL certificate.
