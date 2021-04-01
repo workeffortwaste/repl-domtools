@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+const Table = require('cli-table3')
 const jsdom = require('jsdom')
 const virtualConsole = new jsdom.VirtualConsole() // Init virtual console.
 virtualConsole.sendTo(console, { omitJSDOMErrors: true }) // Send the virtual console to the Node console.
@@ -63,6 +64,7 @@ getDOM(options.url)
     _context.window = e.window
     _context.document = e.window.document
     _context.$ = require('jquery')(e.window)
+    _context.table = (e) => { let a = new Table(); a = a.concat(e); _context.console.log(a.toString()) }
     _context.dom = require('./additional-tools')(e)
   })
   .catch(e => {

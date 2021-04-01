@@ -4,6 +4,7 @@
   "description": "Browser free DevTools for your command line.",
   "main": "index.js",
   "dependencies": {
+    "cli-table3": "^0.6.0",
     "jquery": "^3.5.1",
     "jsdom": "^16.4.0",
     "yargs": "^16.0.3"
