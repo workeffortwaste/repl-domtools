@@ -7,12 +7,11 @@ virtualConsole.sendTo(console, { omitJSDOMErrors: true }) // Send the virtual co
 const { JSDOM } = jsdom
 const yargs = require('yargs')
 const readline = require('readline') // Used for easier output control.
-const ncp = require('copy-paste')
 const ncp = require('copy-paste-win32fix')
 
 const resourceLoader = new jsdom.ResourceLoader({
   strictSSL: false, // Disable requirement for valid SSL certificate.
-  userAgent: 'DOMTools/0.0.1' // Set a user agent, req. for many websites.
+  userAgent: 'DOMTools/1.0.0' // Set a user agent, req. for many websites.
 })
 
 // Command line options.
@@ -42,14 +41,14 @@ const cleanOutput = (msg) => {
 // Override the console.log for the JSDOM context only to use the clean output, not the REPL context.
 console.log = console.warn = function (msg) { cleanOutput(msg) }
 console.error = function (error) {
-  cleanOutput(`${colors.red}${error}${colors.reset}`)
+  cleanOutput(`${global.colors.red}${error}${global.colors.reset}`)
 }
 
 // Initialise the DOM
 const getDOM = async (url) => {
-  console.log(`${colors.dim}REPL DOMTools v0.0.1 - Chris Johnson / @defaced${colors.reset}`)
+  console.log(`${global.colors.dim}REPL DOMTools v1.0.0 - Chris Johnson / @defaced${global.colors.reset}`)
   if (url) {
-    console.log(`Initialising DOM from ${colors.blue}${url}${colors.reset}`)
+    console.log(`Initialising DOM from ${global.colors.blue}${url}${global.colors.reset}`)
     return await JSDOM.fromURL(url, { runScripts: 'dangerously', pretendToBeVisual: true, resources: resourceLoader, virtualConsole })
   } else {
     console.log('Initialising blank DOM')
@@ -74,5 +73,5 @@ getDOM(options.url)
     _context.dom = require('./additional-tools')(e)
   })
   .catch(e => {
-    console.error(`${colors.red}${e.message}${colors.reset}`)
+    console.error(`${global.colors.red}${e.message}${global.colors.reset}`)
   })
