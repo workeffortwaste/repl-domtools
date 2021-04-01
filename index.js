@@ -67,6 +67,8 @@ getDOM(options.url)
     _context.jQuery = require('jquery')(e.window)
     _context.copy = (e) => ncp.copy(e)
     _context.table = (e) => { let a = new Table(); a = a.concat(e); _context.console.log(a.toString()) }
+    _context.$ = (e) => _context.document.querySelector(e)
+    _context.$$ = (e) => [..._context.document.querySelectorAll(e)]
     _context.dom = require('./additional-tools')(e)
   })
   .catch(e => {
