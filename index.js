@@ -1,13 +1,21 @@
 #!/usr/bin/env node
-const Table = require('cli-table3')
-const jsdom = require('jsdom')
+import repl from 'repl'
+import jsdom from 'jsdom'
+
+import yargs from 'yargs'
+import { hideBin } from 'yargs/helpers'
+
+import Table from 'cli-table3'
+import readline from 'readline'
+import ncp from 'copy-paste-win32fix'
+import Table from 'cli-table3'
+
+import jquery from 'jquery'
+import additionalTools from './additional-tools.js'
+
 const virtualConsole = new jsdom.VirtualConsole() // Init virtual console.
 virtualConsole.sendTo(console, { omitJSDOMErrors: true }) // Send the virtual console to the Node console.
-
 const { JSDOM } = jsdom
-const yargs = require('yargs')
-const readline = require('readline') // Used for easier output control.
-const ncp = require('copy-paste-win32fix')
 
 const resourceLoader = new jsdom.ResourceLoader({
   strictSSL: false, // Disable requirement for valid SSL certificate.
@@ -15,7 +23,7 @@ const resourceLoader = new jsdom.ResourceLoader({
 })
 
 // Command line options.
-const options = yargs
+const options = yargs(hideBin(process.argv))
   .usage('Usage: --url <url> ')
   .example('domtools --url https://blacklivesmatter.com/')
   .describe('url', 'URL to use to init. DOM')
@@ -60,17 +68,17 @@ const getDOM = async (url) => {
 getDOM(options.url)
   .then(e => {
     console.log('DOM initialised')
-    const _context = require('repl').start({ prompt: '> ' }).context
+    const _context = repl.start({ prompt: '> ' }).context
     // Hand the DOM to the REPL context.
     _context.location = new URL(options.url)
     _context.window = e.window
     _context.document = e.window.document
-    _context.jQuery = require('jquery')(e.window)
+    _context.jQuery = jquery(e.window)
     _context.copy = (e) => ncp.copy(e)
     _context.table = (e) => { let a = new Table(); a = a.concat(e); _context.console.log(a.toString()) }
     _context.$ = (e) => _context.document.querySelector(e)
     _context.$$ = (e) => [..._context.document.querySelectorAll(e)]
-    _context.dom = require('./additional-tools')(e)
+    _context.dom = additionalTools(e)
   })
   .catch(e => {
     console.error(`${global.colors.red}${e.message}${global.colors.reset}`)

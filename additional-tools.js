@@ -1,9 +1,11 @@
-module.exports = function (dom) {
+import fs from 'fs'
+
+export default (dom) => {
   const jsdom = dom
 
   return {
     // Save the DOM to a file
-    save: (fname) => { require('fs').writeFileSync(fname, jsdom.serialize()) },
+    save: (fname) => { fs.writeFileSync(fname, jsdom.serialize()) },
 
     // Display the raw DOM as a string
     raw: () => { return jsdom.serialize() },
