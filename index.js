@@ -8,7 +8,6 @@ import { hideBin } from 'yargs/helpers'
 import Table from 'cli-table3'
 import readline from 'readline'
 import ncp from 'copy-paste-win32fix'
-import Table from 'cli-table3'
 
 import jquery from 'jquery'
 import additionalTools from './additional-tools.js'
