@@ -2,33 +2,38 @@
 import repl from 'repl'
 import jsdom from 'jsdom'
 
+/* CLI helpers */
 import yargs from 'yargs'
 import { hideBin } from 'yargs/helpers'
-
 import Table from 'cli-table3'
 import readline from 'readline'
 import ncp from 'copy-paste-win32fix'
 
+/* Additional libraries */
 import jquery from 'jquery'
 import additionalTools from './additional-tools.js'
 
-const virtualConsole = new jsdom.VirtualConsole() // Init virtual console.
-virtualConsole.sendTo(console, { omitJSDOMErrors: true }) // Send the virtual console to the Node console.
+/* Initialise the virtual console */
+const virtualConsole = new jsdom.VirtualConsole()
+
+/* Send the virtual console to the Node REPL */
+virtualConsole.sendTo(console, { omitJSDOMErrors: true })
 const { JSDOM } = jsdom
 
+/* JSDOM settings */
 const resourceLoader = new jsdom.ResourceLoader({
-  strictSSL: false, // Disable requirement for valid SSL certificate.
-  userAgent: 'DOMTools/1.0.0' // Set a user agent, req. for many websites.
+  strictSSL: false, /* Be less strict about SSL issues */
+  userAgent: 'DOMTools/1.0.0' /* Custom use agent */
 })
 
-// Command line options.
+/* Command line options */
 const options = yargs(hideBin(process.argv))
   .usage('Usage: --url <url> ')
   .example('domtools --url https://blacklivesmatter.com/')
   .describe('url', 'URL to use to init. DOM')
   .argv
 
-// Colours for console output.
+/* Our global colours object for pretty output */
 global.colors = {
   dim: '\x1b[2m',
   red: '\x1b[31m',
@@ -37,7 +42,10 @@ global.colors = {
   reset: '\x1b[0m'
 }
 
-// Clean the current line, print the output, and show the prompt.
+/**
+ * Clears the current line and prints the output, then shows the prompt
+ * @param {string} msg Message to display on the console
+ */
 const cleanOutput = (msg) => {
   readline.clearLine(process.stdout)
   readline.cursorTo(process.stdout, 0)
@@ -45,13 +53,17 @@ const cleanOutput = (msg) => {
   readline.cursorTo(process.stdout, 2)
 }
 
-// Override the console.log for the JSDOM context only to use the clean output, not the REPL context.
+/* Overrides console.log() for the JSDOM context to use the clean output, not the REPL context */
 console.log = console.warn = function (msg) { cleanOutput(msg) }
 console.error = function (error) {
   cleanOutput(`${global.colors.red}${error}${global.colors.reset}`)
 }
 
-// Initialise the DOM
+/**
+ * Initialises and returns a JSDOM environment
+ * @param {string} url URL to use to init. DOM
+ * @returns 
+ */
 const getDOM = async (url) => {
   console.log(`${global.colors.dim}REPL DOMTools v1.0.0 - Chris Johnson / @defaced${global.colors.reset}`)
   if (url) {
@@ -63,12 +75,12 @@ const getDOM = async (url) => {
   }
 }
 
-// Fetch the DOM and start REPL
+/* Get an interactive DOM from the given URLand init. the REPL */
 getDOM(options.url)
   .then(e => {
     console.log('DOM initialised')
     const _context = repl.start({ prompt: '> ' }).context
-    // Hand the DOM to the REPL context.
+    /* Hand the DOM over to the REPL context */
     _context.location = new URL(options.url)
     _context.window = e.window
     _context.document = e.window.document
