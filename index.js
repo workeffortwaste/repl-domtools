@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 import repl from 'repl'
 import jsdom from 'jsdom'
+import fs from 'fs'
 
 /* CLI helpers */
 import yargs from 'yargs'
@@ -68,7 +69,6 @@ console.error = (error) => {
  * @returns 
  */
 const getDOM = async (url) => {
-  console.log(`${global.colors.dim}REPL DOMTools v1.0.0 - Chris Johnson / @defaced${global.colors.reset}`)
   if (url) {
     console.log(`Initialising DOM from ${global.colors.blue}${url}${global.colors.reset}`)
     return await JSDOM.fromURL(url, { runScripts: 'dangerously', pretendToBeVisual: true, resources: resourceLoader, virtualConsole })
@@ -78,10 +78,30 @@ const getDOM = async (url) => {
   }
 }
 
+
+/* CLI welcome message */
+const { version } = JSON.parse(fs.readFileSync(new URL('./package.json', import.meta.url)))
+console.log(`repl-domtools ${version} / ${colors.blue}@defaced${colors.reset}`)
+
+/* Support */
+if (!process.env.WORKEFFORTWASTE_SUPPORTER) {
+  console.log(`${colors.magenta}
+┃
+┃ ${colors.underscore}Support this project! ${colors.reset}${colors.magenta}
+┃
+┃ Help support the work that goes into creating and maintaining my projects
+┃ and buy me a coffee via Ko-fi or sponsor me on GitHub Sponsors.
+┃
+┃ Ko-fi: https://ko-fi.com/defaced
+┃ GitHub Sponsors: https://github.com/sponsors/workeffortwaste/
+┃${colors.reset}
+  `)
+}
+
 /* Get an interactive DOM from the given URLand init. the REPL */
 getDOM(options.url)
   .then(e => {
-    console.log('DOM initialised')
+    console.log(`${global.colors.green}OK${global.colors.reset}`)
     const _context = repl.start({ prompt: '> ' }).context
     /* Hand the DOM over to the REPL context */
     _context.location = new URL(options.url)
