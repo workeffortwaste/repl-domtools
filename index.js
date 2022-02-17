@@ -78,6 +78,32 @@ const getDOM = async (url) => {
   }
 }
 
+/**
+ * Prints an array as a table for the console.
+ * @param {array} obj Array to parse
+ */
+const printTable = (obj) => {
+  /* If string just print the string */
+  if (typeof obj === 'string') return obj
+
+  /* Format object with index to match devtools output */
+  let data
+  if (Array.isArray(obj)) {
+    data = Array.isArray(obj[0]) ? obj.map((e, i) => [i, ...e]) : obj.map((e, i) => [i, e])
+  } else {
+    data = obj
+  }
+
+  /* Init. a new cli-table. */
+  let table = new Table()
+
+  /* Add our multi-dimensional array to the table obj */
+  table = table.concat(data)
+
+  /* Return the table as a formatted string for the console */
+  return table.toString()
+}
+
 /* CLI welcome message */
 const { version } = JSON.parse(fs.readFileSync(new URL('./package.json', import.meta.url)))
 console.log(`repl-domtools ${version} / ${colors.blue}@defaced${colors.reset}`)
@@ -108,7 +134,7 @@ getDOM(options.url)
     _context.document = e.window.document
     _context.jQuery = jquery(e.window)
     _context.copy = (e) => ncp.copy(e)
-    _context.table = (e) => { let a = new Table(); a = a.concat(e); _context.console.log(a.toString()) }
+    _context.table = (e) => { _context.console.log(printTable(e)) }
     _context.$ = (e) => _context.document.querySelector(e)
     _context.$$ = (e) => [..._context.document.querySelectorAll(e)]
     _context.dom = additionalTools(e)
