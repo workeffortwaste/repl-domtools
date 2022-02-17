@@ -23,7 +23,7 @@
     "repl"
   ],
   "author": "Chris Johnson (https://defaced.dev)",
-  "license": "ISC",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/workeffortwaste/repl-domtools/issues"
   },
