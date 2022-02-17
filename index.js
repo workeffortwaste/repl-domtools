@@ -54,8 +54,8 @@ const cleanOutput = (msg) => {
 }
 
 /* Overrides console.log() for the JSDOM context to use the clean output, not the REPL context */
-console.log = console.warn = function (msg) { cleanOutput(msg) }
-console.error = function (error) {
+console.log = console.warn = (msg) => { cleanOutput(msg) }
+console.error = (error) => {
   cleanOutput(`${global.colors.red}${error}${global.colors.reset}`)
 }
 
