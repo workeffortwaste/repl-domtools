@@ -103,7 +103,7 @@ getDOM(options.url)
     console.log(`${global.colors.green}OK${global.colors.reset}`)
     const _context = repl.start({ prompt: '> ' }).context
     /* Hand the DOM over to the REPL context */
-    _context.location = new URL(options.url)
+    _context.location = options.url ? new URL(options.url) : null
     _context.window = e.window
     _context.document = e.window.document
     _context.jQuery = jquery(e.window)
