@@ -78,7 +78,6 @@ const getDOM = async (url) => {
   }
 }
 
-
 /* CLI welcome message */
 const { version } = JSON.parse(fs.readFileSync(new URL('./package.json', import.meta.url)))
 console.log(`repl-domtools ${version} / ${colors.blue}@defaced${colors.reset}`)
