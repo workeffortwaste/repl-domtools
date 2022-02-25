@@ -27,7 +27,7 @@ const { version } = JSON.parse(fs.readFileSync(new URL('./package.json', import.
 /* JSDOM settings */
 const resourceLoader = new jsdom.ResourceLoader({
   strictSSL: false, /* Be less strict about SSL issues */
-  userAgent: 'repl-domtools/' + version /* Custom use agent */
+  userAgent: 'repl-domtools/' + version /* Custom user agent */
 })
 
 /* Command line options */
