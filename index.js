@@ -21,10 +21,13 @@ const virtualConsole = new jsdom.VirtualConsole()
 virtualConsole.sendTo(console, { omitJSDOMErrors: true })
 const { JSDOM } = jsdom
 
+/* Get version number */
+const { version } = JSON.parse(fs.readFileSync(new URL('./package.json', import.meta.url)))
+
 /* JSDOM settings */
 const resourceLoader = new jsdom.ResourceLoader({
   strictSSL: false, /* Be less strict about SSL issues */
-  userAgent: 'DOMTools/1.0.0' /* Custom use agent */
+  userAgent: 'repl-domtools/' + version /* Custom use agent */
 })
 
 /* Command line options */
@@ -105,7 +108,6 @@ const printTable = (obj) => {
 }
 
 /* CLI welcome message */
-const { version } = JSON.parse(fs.readFileSync(new URL('./package.json', import.meta.url)))
 console.log(`repl-domtools ${version} / ${colors.blue}@defaced${colors.reset}`)
 
 /* Support */
