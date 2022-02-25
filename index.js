@@ -34,7 +34,8 @@ const resourceLoader = new jsdom.ResourceLoader({
 const options = yargs(hideBin(process.argv))
   .usage('Usage: --url <url> ')
   .example('domtools --url https://blacklivesmatter.com/')
-  .describe('url', 'URL to use to init. DOM')
+  .describe('u', 'URL to use to init. DOM')
+  .alias('u', 'url')
   .argv
 
 /* Our global colours object for pretty output */
