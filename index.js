@@ -140,6 +140,7 @@ getDOM(options.url)
     _context.$ = (e) => _context.document.querySelector(e)
     _context.$$ = (e) => [..._context.document.querySelectorAll(e)]
     _context.dom = additionalTools(e)
+    /* Handle the unhandled rejections from jsdom */
     process.on('unhandledRejection', (error) => { console.error(`${global.colors.red}${error}${global.colors.reset}`) })
   })
   .catch(e => {
