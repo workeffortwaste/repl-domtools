@@ -130,7 +130,7 @@ if (!process.env.WORKEFFORTWASTE_SUPPORTER) {
 getDOM(options.url)
   .then(e => {
     console.log(`${global.colors.green}OK${global.colors.reset}`)
-    const _context = repl.start({ prompt: '> ' }).context
+    const _context = repl.start({ prompt: '> ', ignoreUndefined: true}).context
     /* Hand the DOM over to the REPL context */
     _context.location = options.url ? new URL(options.url) : null
     _context.window = e.window
