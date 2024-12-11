@@ -118,9 +118,8 @@ if (!process.env.WORKEFFORTWASTE_SUPPORTER) {
 ┃ ${colors.underscore}Support this project! ${colors.reset}${colors.magenta}
 ┃
 ┃ Help support the work that goes into creating and maintaining my projects
-┃ and buy me a coffee via Ko-fi or sponsor me on GitHub Sponsors.
+┃ and consider donating via on GitHub Sponsors.
 ┃
-┃ Ko-fi: https://ko-fi.com/defaced
 ┃ GitHub Sponsors: https://github.com/sponsors/workeffortwaste/
 ┃${colors.reset}
   `)
