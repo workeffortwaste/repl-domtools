@@ -5,11 +5,11 @@
   "main": "index.js",
   "type": "module",
   "dependencies": {
-    "cli-table3": "^0.6.1",
+    "cli-table3": "^0.6.5",
     "copy-paste-win32fix": "^1.4.0",
-    "jquery": "^3.6.0",
-    "jsdom": "^19.0.0",
-    "yargs": "^17.3.1"
+    "jquery": "^3.7.1",
+    "jsdom": "^25.0.1",
+    "yargs": "^17.7.2"
   },
   "bin": {
     "domtools": "index.js"
