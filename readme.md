@@ -93,9 +93,9 @@ Return the DOM as a string.
 dom.raw()
 ```
 
-### Examples
+## Examples
 
-## Download all the images from a URL 🆕
+### Download all the images from a URL 🆕
 
 ```
 domtools -u 'https://example.com/' -s '$$("img").forEach(e => console.log(e.src))' | xargs -n 1 curl -O
