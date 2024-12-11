@@ -109,7 +109,7 @@ const printTable = (obj) => {
 }
 
 /* CLI welcome message */
-console.log(`repl-domtools ${version} / ${colors.blue}@defaced${colors.reset}`)
+console.log(`repl-domtools ${version} / ${colors.blue}@defaced.dev (bluesky)${colors.reset}`)
 
 /* Support */
 if (!process.env.WORKEFFORTWASTE_SUPPORTER) {
